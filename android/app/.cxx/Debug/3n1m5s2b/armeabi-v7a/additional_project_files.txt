@@ -1,0 +1,7 @@
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/ComponentDescriptors.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/EventEmitters.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/Props.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/ShadowNodes.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/States.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/rnreanimatedJSI-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/rnreanimated-generated.cpp.o
