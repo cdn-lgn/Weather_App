@@ -1,7 +1,9 @@
 {
   "buildFiles": [
+    "/home/kali/Desktop/WeatherApp/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+    "/home/kali/Desktop/WeatherApp/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt"
   ],
   "cleanCommandsComponents": [
@@ -30,6 +32,16 @@
         "/home/kali/.gradle/caches/8.13/transforms/8cb416b8178cb0e7f140959230f7f0bf/transformed/react-android-0.79.2-debug/prefab/modules/jsi/libs/android.armeabi-v7a/libjsi.so",
         "/home/kali/.gradle/caches/8.13/transforms/8cb416b8178cb0e7f140959230f7f0bf/transformed/react-android-0.79.2-debug/prefab/modules/reactnative/libs/android.armeabi-v7a/libreactnative.so"
       ]
+    },
+    "react_codegen_RNVectorIconsSpec::@479809fae146501fd34d": {
+      "toolchain": "toolchain",
+      "abi": "armeabi-v7a",
+      "artifactName": "react_codegen_RNVectorIconsSpec"
+    },
+    "react_codegen_rnasyncstorage::@1596841e19ec5b9eeffe": {
+      "toolchain": "toolchain",
+      "abi": "armeabi-v7a",
+      "artifactName": "react_codegen_rnasyncstorage"
     },
     "react_codegen_rnreanimated::@8afabad14bfffa3f8b9a": {
       "toolchain": "toolchain",

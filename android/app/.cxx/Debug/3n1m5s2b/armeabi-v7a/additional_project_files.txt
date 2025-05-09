@@ -1,3 +1,10 @@
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/ComponentDescriptors.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/EventEmitters.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/Props.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/ShadowNodes.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/States.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/rnasyncstorageJSI-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/rnasyncstorage-generated.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/ComponentDescriptors.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/EventEmitters.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/Props.cpp.o
@@ -5,3 +12,10 @@
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/States.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/rnreanimatedJSI-generated.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/rnreanimated-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/RNVectorIconsSpec-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/ComponentDescriptors.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/EventEmitters.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/Props.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/RNVectorIconsSpecJSI-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/ShadowNodes.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/States.cpp.o
