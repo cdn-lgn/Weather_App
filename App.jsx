@@ -1,10 +1,11 @@
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import './global.css';
+import WeatherScreen from './src/components/WeatherScreen';
 
 const App = () => {
   return (
     <View>
-      <Text className="text-4xl text-cyan-500">Hell No</Text>
+      <WeatherScreen />
     </View>
   );
 };
