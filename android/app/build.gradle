@@ -78,7 +78,14 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-
+splits {
+    abi {
+      enable true
+      reset()
+      include 'armeabi-v7a', 'arm64-v8a'
+      universalApk false
+    }
+  }
     namespace "com.weatherapp"
     defaultConfig {
         applicationId "com.weatherapp"

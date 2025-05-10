@@ -125,14 +125,14 @@ const WeatherScreen = () => {
       const {hourly, hourly_units: units} = dailyResponse.data;
       const {daily} = sevenDayResponse.data;
 
-      // Make sure we're setting an array of data points
-      const graphData = Array.from({length: 24}, (_, index) => ({
-        value: Math.round(hourly.temperature_2m[index]),
-        label: `${index}h`,
-        dataPointText: `${Math.round(hourly.temperature_2m[index])}°`
+      // Fix graph data format
+      const graph = hourly.temperature_2m.slice(0, 24).map((temp, index) => ({
+        value: temp,
+        dataPointText: `${Math.round(temp)}°`,
+        label: `${index}h`
       }));
 
-      setGraphData(graphData);
+      setGraphData(graph);
 
       setTodayReport({
         hourly: {
@@ -320,23 +320,32 @@ const WeatherScreen = () => {
         <View style={{width: '100%'}} className="justify-center">
           <LineChart
             data={graphData}
-            initialSpacing={5}
-            spacing={35}
+
             maxValue={60}
-            dataPointsRadius={0}
             minValue={-20}
-            color="rgba(255, 255, 255, 0.8)"
-            areaChart
-            isAnimated
-            animationDuration={1500}
-            startFillColor="#56acce"
-            startOpacity={0.8}
-            endOpacity={0.3}
-            hideAxesAndRules
-            hideYAxisText
+            spacing={40}          // Reduced spacing between points
+            initialSpacing={15}   // Increased initial left padding
+            color="orange"
+            thickness={2}
+            hideDataPoints={false}
+            dataPointsColor="white"
+            dataPointsRadius={3}
+            textShiftY={-20}      // Move text up more
+            textShiftX={-8}       // Adjust text horizontal position
+            textSize={14}         // Larger font size
             textColor="white"
-            textFontSize={14}
-            xAxisLabelTextStyle={{color: 'white', fontSize: 12}}
+            hideRules
+            yAxisColor="transparent"
+            xAxisColor="transparent"
+            hideYAxisText
+            showVerticalLines={false}
+            areaChart
+            curved
+            startFillColor="orange"
+            endFillColor="transparent"
+            startOpacity={0.3}
+            endOpacity={0.1}
+            xAxisLabelTextStyle={{color:"white"}}
           />
         </View>
       </View>

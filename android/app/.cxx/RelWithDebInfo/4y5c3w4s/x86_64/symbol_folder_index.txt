@@ -1,0 +1,1 @@
+/home/kali/Desktop/WeatherApp/android/app/build/intermediates/cxx/RelWithDebInfo/4y5c3w4s/obj/x86_64
