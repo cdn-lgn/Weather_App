@@ -34,7 +34,18 @@ const WeatherScreen = () => {
   const fetchData = async () => {
     try {
       const coords = await fetchLocation();
-      setLocation(coords);
+      fetchWeatherData(coords.latitude, coords.longitude);
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords.latitude}&lon=${coords.longitude}`
+      );
+      const data = response.data;
+      const results = {
+        name: data.name || data.display_name,
+        display_name: data.display_name,
+        lat: data.lat,
+        lon: data.lon,
+      }
+      setLocation(results)
     } catch (error) {
       Alert.alert(
         'Permission Required',
@@ -82,7 +93,7 @@ const WeatherScreen = () => {
   };
 
   const fetchWeatherData = async (lat, lon) => {
-    const dailyReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,windspeed_10m&forecast_days=1&timezone=auto`;
+    const dailyReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,cloudcover,precipitation&forecast_days=1&timezone=auto`;
     const sevenDayReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&forecast_days=7&timezone=auto`;
 
     try {
@@ -118,25 +129,21 @@ const WeatherScreen = () => {
   return (
     <ScrollView className="h-full w-full px-8">
       {/* Top Bar */}
-      <View className="flex-row justify-between pb-2 mt-5">
-        <View className="flex-row items-center gap-3">
+      <View className="flex-row justify-between items-center pb-2 mt-5">
+        <View className="flex-row items-center flex-1 mr-8">
           <Ionicons name="location-outline" style={[styles.text]} />
-          <Text style={[styles.text]}>{location?.name}</Text>
+          <Text style={[styles.text]} ellipsizeMode="tail" numberOfLines={1}>
+            {location?.name}
+          </Text>
         </View>
-        <View className="flex-row items-center gap-6">
+        <View className="flex-row items-center gap-4">
           <TouchableOpacity
             onPress={() => setSearchModal(true)}
             style={styles.circleButton}>
-            <Ionicons
-              name="search-outline"
-              style={[styles.text, {fontSize: 23}]}
-            />
+            <Ionicons name="search-outline" style={[styles.text, {fontSize: 23}]} />
           </TouchableOpacity>
           <TouchableOpacity onPress={fetchData} style={styles.circleButton}>
-            <FontAwesome6
-              name="location-crosshairs"
-              style={[styles.text, {fontSize: 23}]}
-            />
+            <FontAwesome6 name="location-crosshairs" style={[styles.text, {fontSize: 23}]} />
           </TouchableOpacity>
         </View>
       </View>
@@ -171,7 +178,7 @@ const WeatherScreen = () => {
                 styles.text,
                 {fontSize: 50, textAlignVertical: 'bottom'},
               ]}>
-             {todayReport.hourly && todayReport.hourly.temperature_2m[dayjs().format("HH")]}
+             {todayReport.hourly && Math.round(todayReport.hourly.temperature_2m[dayjs().format("HH")])}
             </Text>
             <Text style={[styles.text, {fontSize: 23}]}>
               {upcommingDaysReport?.date && `${upcommingDaysReport.max[0]}/${upcommingDaysReport.min[0]}`}
@@ -319,7 +326,7 @@ const WeatherScreen = () => {
                           height: 40,
                         }}
                         onPress={() => placeClickHandler(place)}>
-                        <Text style={{color: 'white'}} numberOfLines={2}>
+                        <Text style={{color: 'white'}} numberOfLines={2} ellipsizeMode="tail">
                           {place.display_name}
                         </Text>
                       </TouchableOpacity>

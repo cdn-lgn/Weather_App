@@ -11,7 +11,7 @@ async function fetchLocation() {
     Geolocation.getCurrentPosition(
       position => resolve(position.coords),
       error => reject(error),
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      // { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );
   });
 }
