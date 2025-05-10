@@ -2,6 +2,8 @@
   "buildFiles": [
     "/home/kali/Desktop/WeatherApp/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
     "/home/kali/Desktop/WeatherApp/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
@@ -49,10 +51,20 @@
       "abi": "x86",
       "artifactName": "react_codegen_rnblurview"
     },
+    "react_codegen_rngesturehandler_codegen::@39f233abcd2c728bc6ec": {
+      "toolchain": "toolchain",
+      "abi": "x86",
+      "artifactName": "react_codegen_rngesturehandler_codegen"
+    },
     "react_codegen_rnreanimated::@8afabad14bfffa3f8b9a": {
       "toolchain": "toolchain",
       "abi": "x86",
       "artifactName": "react_codegen_rnreanimated"
+    },
+    "react_codegen_rnskia::@376d8504f62839611b97": {
+      "toolchain": "toolchain",
+      "abi": "x86",
+      "artifactName": "react_codegen_rnskia"
     },
     "react_codegen_safeareacontext::@7984cd80db47aa7b952a": {
       "toolchain": "toolchain",

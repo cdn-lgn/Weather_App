@@ -46,6 +46,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnasyncstorage_autolinked_build/cmake_install.cmake")
   include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnblurview_autolinked_build/cmake_install.cmake")
+  include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnskia_autolinked_build/cmake_install.cmake")
+  include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rngesturehandler_codegen_autolinked_build/cmake_install.cmake")
   include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/rnreanimated_autolinked_build/cmake_install.cmake")
   include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/safeareacontext_autolinked_build/cmake_install.cmake")
   include("/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/armeabi-v7a/RNVectorIconsSpec_autolinked_build/cmake_install.cmake")

@@ -62,6 +62,56 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
 endif()
 
+# react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/rnskia-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
+endif()
+
+# react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/ComponentDescriptors.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/EventEmitters.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/Props.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/ShadowNodes.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/States.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@shopify/react-native-skia/android/build/generated/source/codegen/jni/react/renderer/components/rnskia/rnskiaJSI-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
+endif()
+
+# react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/rngesturehandler_codegen-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
+endif()
+
+# react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/ComponentDescriptors.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/EventEmitters.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/Props.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/ShadowNodes.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/States.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen/rngesturehandler_codegenJSI-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
+endif()
+
 # react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/*.cpp")
 set(OLD_GLOB

@@ -15,6 +15,26 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  darkOverlay: {
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  weatherIconButton: {
+    padding: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60,
+    width: 60,
   }
 })
 

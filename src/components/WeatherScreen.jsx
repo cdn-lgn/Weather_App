@@ -9,11 +9,15 @@ import {
   Modal,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import fetchLocation from '../utils/fetchLocation';
@@ -22,6 +26,16 @@ import styles from '../utils/style';
 import dayjs from 'dayjs';
 import {BlurView} from '@react-native-community/blur';
 import axios from 'axios';
+import {WEATHER_API, LOCATION_API, WEATHER_IMAGES} from '../utils/constants';
+import {getWeatherStatus, getFeelsLikeText, getWeatherImage, isNightTime, getWeatherIcon} from '../utils/weatherUtils';
+
+const getThermometerIcon = (temp) => {
+  if (temp <= 15) return "thermometer-empty";
+  if (temp <= 23) return "thermometer-quarter";
+  if (temp <= 27) return "thermometer-half";
+  if (temp <= 32) return "thermometer-three-quarters";
+  return "thermometer-full";
+};
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState(null);
@@ -29,9 +43,17 @@ const WeatherScreen = () => {
   const [upcommingDaysReport, setUpcommingDaysReport] = useState({});
   const [searchLocations, setSearchLocations] = useState([]);
   const [searchModal, setSearchModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const intervalRef = useRef(null);
 
+  const getCurrentHourIndex = () => {
+    const now = new Date();
+    return now.getHours();
+  };
+
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const coords = await fetchLocation();
       fetchWeatherData(coords.latitude, coords.longitude);
@@ -55,23 +77,19 @@ const WeatherScreen = () => {
           {text: 'Open Settings', onPress: openAppSettings},
         ],
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const searchHandle = text => {
-    if (intervalRef.current) {
-      clearTimeout(intervalRef.current);
-    }
+    if (intervalRef.current) clearTimeout(intervalRef.current);
+    if (!text) return setSearchLocations([]);
+    setIsSearching(true);
+
     intervalRef.current = setTimeout(async () => {
-      if (!text) {
-        setSearchLocations([]);
-        return;
-      }
       try {
-        const response = await axios.get(
-          `https://nominatim.openstreetmap.org/search?q=${text}&format=json`,
-        );
-        const data = response.data;
+        const {data} = await axios.get(LOCATION_API.SEARCH(text));
         const results = data.map(place => ({
           name: place.name || place.display_name,
           display_name: place.display_name,
@@ -80,53 +98,52 @@ const WeatherScreen = () => {
         }));
         setSearchLocations(results);
       } catch (error) {
-        console.error('Error fetching location:', error);
+        console.error('Error:', error);
         setSearchLocations([]);
+      } finally {
+        setIsSearching(false);
       }
     }, 1000);
   };
 
   const placeClickHandler = async place => {
-    console.log(place);
     await fetchWeatherData(place.lat, place.lon);
+    setSearchModal(false);
     setLocation(place);
   };
 
   const fetchWeatherData = async (lat, lon) => {
-    const dailyReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,windspeed_10m,cloudcover,precipitation&forecast_days=1&timezone=auto
-`;
-    const sevenDayReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&forecast_days=7&timezone=auto`;
-    console.log(dailyReport);
     try {
-      const hour = new Date().getHours();
+      const hour = getCurrentHourIndex();
       const [dailyResponse, sevenDayResponse] = await Promise.all([
-        axios.get(dailyReport),
-        axios.get(sevenDayReport),
+        axios.get(WEATHER_API.DAILY(lat, lon)),
+        axios.get(WEATHER_API.WEEKLY(lat, lon)),
       ]);
 
-      const result1 = dailyResponse.data;
-      const result2 = sevenDayResponse.data;
+      const {hourly, hourly_units: units} = dailyResponse.data;
+      const {daily} = sevenDayResponse.data;
 
       setTodayReport({
         hourly: {
-          time: result1.hourly.time,
-          temp: result1.hourly.temperature_2m,
+          time: hourly.time,
+          temp: hourly.temperature_2m,
         },
-        feelsLike: result1.hourly.apparent_temperature[hour],
-        humidity: result1.hourly.relative_humidity_2m[hour],
-        wind: result1.hourly.windspeed_10m[hour],
-        rain: result1.hourly.precipitation,
-        clouds: result1.hourly.cloudcover,
-        units: result1.hourly_units,
+        feelsLike: hourly.apparent_temperature[hour],
+        humidity: hourly.relative_humidity_2m[hour],
+        wind: hourly.windspeed_10m[hour],
+        rain: hourly.precipitation,
+        clouds: hourly.cloudcover,
+        units,
       });
 
       setUpcommingDaysReport({
-        date: result2.daily.time,
-        max: result2.daily.temperature_2m_max.map(temp => Math.round(temp)),
-        min: result2.daily.temperature_2m_min.map(temp => Math.round(temp)),
+        date: daily.time,
+        max: daily.temperature_2m_max.map(Math.round),
+        min: daily.temperature_2m_min.map(Math.round),
       });
     } catch (error) {
-      console.log(error);
+      console.log('Weather data fetch error:', error);
+      Alert.alert('Error', 'Unable to fetch weather data');
     }
   };
 
@@ -135,7 +152,7 @@ const WeatherScreen = () => {
   }, []);
 
   return (
-    <ScrollView className="h-full w-full px-8">
+    <ScrollView className="h-full w-full px-4">
       {/* Top Bar */}
       <View className="flex-row justify-between items-center pb-2 mt-5">
         <View className="flex-row items-center flex-1 mr-8">
@@ -171,60 +188,66 @@ const WeatherScreen = () => {
         }}
         className="my-5 h-[200px]">
         <ImageBackground
-          source={require('../assets/img1.jpg')}
+          source={isNightTime() ? WEATHER_IMAGES.NIGHT : WEATHER_IMAGES.DAY}
           style={{
-            flex: 1,
-            borderRadius: 10,
-            overflow: 'hidden',
-            justifyContent: 'space-between',
-            padding: 10,
+            height: '100%',
+            width: '100%',
           }}
-          imageStyle={{borderRadius: 10}}
           blurRadius={10}>
-          <View>
-            <Text style={[styles.text]}>Today, {dayjs().format('MMM DD')}</Text>
-            {todayReport?.hourly  && (<Text style={[styles.text, { fontSize: 23 }]}>
-  {`${
-    todayReport.hourly.temp[dayjs().format('HH')] <= 15
-      ? 'Cold'
-      : todayReport.hourly.temp[dayjs().format('HH')] <= 25
-      ? 'Warm'
-      : todayReport.hourly.temp[dayjs().format('HH')] <= 32
-      ? 'Hot'
-      : 'Very hot'
-  }${
-    todayReport.rain[dayjs().format('HH')] > 0.2
-      ? ' and rainy'
-      : todayReport.clouds[dayjs().format('HH')] > 60
-      ? ' and cloudy'
-      : ' and clear'
-  }`}
-</Text>)}
+          <View style={styles.darkOverlay}>
+            <View className="flex-row justify-between items-start">
+              <View>
+                <Text style={[styles.text]}>Today, {dayjs().format('MMM DD')}</Text>
+                <Text style={[styles.text, {fontSize: 23}]}>
+                  {todayReport?.hourly && getWeatherStatus(
+                    todayReport.hourly.temp[getCurrentHourIndex()],
+                    todayReport.rain[getCurrentHourIndex()],
+                    todayReport.clouds[getCurrentHourIndex()],
+                  )}
+                </Text>
+              </View>
 
-          </View>
+              {todayReport?.hourly && (
+                <View style={styles.weatherIconButton}>
+                  {(() => {
+                    const icon = getWeatherIcon(
+                      todayReport.hourly.temp[getCurrentHourIndex()],
+                      todayReport.rain[getCurrentHourIndex()],
+                      todayReport.clouds[getCurrentHourIndex()]
+                    );
+                    const IconComponent = icon.library === 'FontAwesome5' ? FontAwesome5 : FontAwesome6;
+                    return (
+                      <IconComponent
+                        name={icon.name}
+                        style={[styles.text, {fontSize: 30}]}
+                      />
+                    );
+                  })()}
+                </View>
+              )}
+            </View>
 
-          <View className="flex items-end justify-between flex-row">
-            <Text
-              style={[
-                styles.text,
-                {fontSize: 45},
-              ]}>
-              {todayReport.hourly &&
-               `${Math.round(todayReport.hourly.temp[dayjs().format('HH')])}${todayReport.units.temperature_2m}`}
-            </Text>
-            <Text style={[styles.text,{paddingBottom:5}]}>
-              {upcommingDaysReport?.date &&
-                `${upcommingDaysReport.max[0]}/${upcommingDaysReport.min[0]}${todayReport.units.temperature_2m}`}
-            </Text>
-            <TouchableOpacity
-              onPress={() => fetchData()}
-              style={[styles.circleButton, {transform: [{scaleX: -1}]}]}
-              activeOpacity={0.7}>
-              <MaterialCommunityIcons
-                name="refresh"
-                style={[styles.text, {fontSize: 23}]}
-              />
-            </TouchableOpacity>
+            <View className="flex items-end justify-between flex-row">
+              <Text style={[styles.text, {fontSize: 45}]}>
+                {todayReport.hourly &&
+                  `${Math.round(todayReport.hourly.temp[getCurrentHourIndex()])}${
+                    todayReport.units.temperature_2m
+                  }`}
+              </Text>
+              <Text style={[styles.text, {paddingBottom: 5}]}>
+                {upcommingDaysReport?.date &&
+                  `${upcommingDaysReport.max[0]}/${upcommingDaysReport.min[0]}${todayReport.units.temperature_2m}`}
+              </Text>
+              <TouchableOpacity
+                onPress={() => fetchWeatherData(location.lat, location.lon)}
+                style={[styles.circleButton, {transform: [{scaleX: -1}]}]}
+                activeOpacity={0.7}>
+                <MaterialCommunityIcons
+                  name="refresh"
+                  style={[styles.text, {fontSize: 23}]}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -238,29 +261,41 @@ const WeatherScreen = () => {
           <View className="flex-col w-1/2">
             <Text className="text-white">Feel Like</Text>
             <Text style={styles.text}>
-              <FontAwesome name="thermometer-empty" style={styles.text} /> {todayReport.hourly &&
-               Math.round(todayReport.feelsLike)+" "+todayReport.units.apparent_temperature}
+              <FontAwesome
+                name={todayReport.feelsLike ? getThermometerIcon(todayReport.feelsLike) : "thermometer-empty"}
+                style={styles.text}
+              />{' '}
+              {todayReport.hourly &&
+                Math.round(todayReport.feelsLike) +
+                  '  ' +
+                  todayReport.units.apparent_temperature}
             </Text>
           </View>
 
           <Text className="text-white w-1/2">
-            Humidity is making it feel cooler
+            {getFeelsLikeText(todayReport.feelsLike)}
           </Text>
         </View>
 
         {/* Two Column Cards */}
         <View className="flex-row justify-between w-full">
           <View style={[styles.S3]} className="w-[47%] p-5">
-            <Text className="text-white">Feels Like</Text>
+            <Text className="text-white">Wind</Text>
             <Text style={styles.text}>
-              <FontAwesome6 name="wind" style={styles.text} /> {`${todayReport.wind+" "+todayReport.units.windspeed_10m}`}
+              <FontAwesome6 name="wind" style={styles.text} />{' '}
+              {todayReport.wind &&
+                todayReport.wind + ' ' + todayReport.units.windspeed_10m}
             </Text>
           </View>
 
           <View style={[styles.S3]} className="w-[47%] p-5">
             <Text className="text-white">Humidity</Text>
             <Text style={styles.text}>
-              <Entypo name="water" style={styles.text} /> {`${todayReport.humidity+" "+todayReport.units.relative_humidity_2m}`}
+              <Entypo name="water" style={styles.text} />{' '}
+              {todayReport.humidity &&
+                todayReport.humidity +
+                  ' ' +
+                  todayReport.units.relative_humidity_2m}
             </Text>
           </View>
         </View>
@@ -269,17 +304,10 @@ const WeatherScreen = () => {
       {/* Section 4 - Hourly Forecast */}
       <View style={[styles.S3]} className="w-full mb-5 p-5 rounded-3xl">
         <View className="flex-row justify-between items-center mb-4">
-          <Text style={[styles.text]} className="text-lg">
-            Today
-          </Text>
-          <Pressable>
-            <Text style={[styles.text]} className="text-sm opacity-80">
-              View full report
-            </Text>
-          </Pressable>
+          <Text style={[styles.text]} className="text-lg">Today</Text>
         </View>
-        <View style={{height: 150}} className="justify-center">
-          {/* Add your hourly forecast content here */}
+        <View style={{height: 200}} className="justify-center">
+          {/* Empty section for future implementation */}
         </View>
       </View>
 
@@ -289,16 +317,42 @@ const WeatherScreen = () => {
           <Text style={[styles.text]} className="text-lg">
             Next Forecast
           </Text>
-          <Pressable>
-            <Text style={[styles.text]} className="text-sm opacity-80">
-              7 days
-            </Text>
-          </Pressable>
+          <Text style={[styles.text]} className="text-sm opacity-80">
+            7 days
+          </Text>
         </View>
-        <View style={{height: 250}} className="justify-between">
-          {/* Add your weekly forecast content here */}
-        </View>
+        <ScrollView style={{height: 250}} showsVerticalScrollIndicator={false}>
+          <View className="gap-4">
+            {upcommingDaysReport?.date?.map((date, index) => (
+              <View
+                key={index}
+                className="flex-row items-center justify-between">
+                <Text style={styles.text} className="w-24">
+                  {index === 0
+                    ? 'Today'
+                    : index === 1
+                    ? 'Tomorrow'
+                    : `${dayjs(date).format('ddd')}, ${dayjs(date).format('DD')}`}
+                </Text>
+                <View className="flex-row items-center gap-2">
+                  <Text style={styles.text}>
+                    {upcommingDaysReport.max[index]}°
+                  </Text>
+                  <Text style={[styles.text, {opacity: 0.5}]}>
+                    {upcommingDaysReport.min[index]}°
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
       </View>
+
+      {isLoading && (
+        <View className="absolute inset-0 flex items-center justify-center bg-black/50">
+          <ActivityIndicator size="large" color="white" />
+        </View>
+      )}
 
       {/* =========Modal View Here ========== */}
       {/* =========Modal View Here ========== */}
@@ -309,69 +363,81 @@ const WeatherScreen = () => {
           blurType="dark"
           blurAmount={1}
           reducedTransparencyFallbackColor="black">
-          <Pressable
-            style={{flex: 1}}
-            onPress={() => setSearchModal(false)}
-            className="flex items-end justify-end">
-            <View
-              style={[
-                styles.S3,
-                {
-                  width: '100%',
-                  height: '90%',
-                  paddingVertical: 16,
-                  paddingHorizontal: 8,
-                  gap: 16,
-                  justifyContent: 'flex-start',
-                },
-              ]}
-              onStartShouldSetResponder={() => true}>
-              <View style={{backgroundColor: 'black', borderRadius: 20}}>
-                <TextInput
-                  placeholder="place"
-                  style={{
-                    height: 40,
-                    borderWidth: 2,
-                    borderColor: 'rgba(255, 255, 255, 0.3)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                    borderRadius: 20,
-                    padding: 10,
-                  }}
-                  onChangeText={text => {
-                    searchHandle(text);
-                  }}
-                />
-              </View>
-              <ScrollView
-                style={{
-                  backgroundColor: 'black',
-                  borderRadius: 10,
-                  padding: 12,
-                }}>
-                <View style={{gap: 4}}>
-                  {searchLocations &&
-                    searchLocations.map((place, index) => (
-                      <TouchableOpacity
-                        key={index}
-                        style={{
-                          borderRadius: 10,
-                          borderColor: '#212121',
-                          borderBottomWidth: 1,
-                          height: 40,
-                        }}
-                        onPress={() => placeClickHandler(place)}>
-                        <Text
-                          style={{color: 'white'}}
-                          numberOfLines={2}
-                          ellipsizeMode="tail">
-                          {place.display_name}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{flex: 1}}>
+            <Pressable
+              style={{flex: 1}}
+              onPress={() => setSearchModal(false)}
+              className="flex items-end justify-end">
+              <View
+                style={[
+                  styles.S3,
+                  {
+                    width: '100%',
+                    height: '90%',
+                    paddingVertical: 16,
+                    paddingHorizontal: 8,
+                    gap: 16,
+                    justifyContent: 'flex-start',
+                  },
+                ]}
+                onStartShouldSetResponder={() => true}>
+                <View style={{backgroundColor: 'black', borderRadius: 20}}>
+                  <TextInput
+                    placeholder="Place"
+                    placeholderTextColor="rgba(255,255,255,0.5)"
+                    style={{
+                      height: 40,
+                      borderWidth: 2,
+                      borderColor: 'rgba(255, 255, 255, 0.3)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                      borderRadius: 20,
+                      padding: 10,
+                      color: 'white',
+                    }}
+                    onChangeText={searchHandle}
+                  />
                 </View>
-              </ScrollView>
-            </View>
-          </Pressable>
+                <ScrollView
+                  keyboardShouldPersistTaps="always"
+                  style={{
+                    backgroundColor: 'black',
+                    borderRadius: 10,
+                    padding: 12,
+                  }}>
+                  <View style={{gap: 4}}>
+                    {isSearching ? (
+                      <View className="py-4 items-center">
+                        <ActivityIndicator color="white" />
+                      </View>
+                    ) : (
+                      searchLocations.map((place, index) => (
+                        <TouchableOpacity
+                          key={index}
+                          activeOpacity={0.7}
+                          style={{
+                            borderRadius: 10,
+                            borderColor: '#212121',
+                            borderBottomWidth: 1,
+                            padding: 8,
+                            minHeight: 40,
+                          }}
+                          onPress={() => placeClickHandler(place)}>
+                          <Text
+                            style={{color: 'white'}}
+                            numberOfLines={2}
+                            ellipsizeMode="tail">
+                            {place.display_name}
+                          </Text>
+                        </TouchableOpacity>
+                      ))
+                    )}
+                  </View>
+                </ScrollView>
+              </View>
+            </Pressable>
+          </KeyboardAvoidingView>
         </BlurView>
       </Modal>
       {/* =========Modal View end Here ========== */}
