@@ -25,6 +25,8 @@ import axios from 'axios';
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState(null);
+  const [todayReport, setTodayReport] = useState({});
+  const [upcommingDaysReport, setUpcommingDaysReport] = useState({});
   const [searchLocations, setSearchLocations] = useState([]);
   const [searchModal, setSearchModal] = useState(false);
   const intervalRef = useRef(null);
@@ -73,22 +75,41 @@ const WeatherScreen = () => {
     }, 1000);
   };
 
+  const placeClickHandler = async place => {
+    console.log(place);
+    await fetchWeatherData(place.lat, place.lon);
+    setLocation(place)
+  };
 
-  const placeClickHandler = async(place)=>{
-console.log(place)
-await fetchWeatherData(place.lat,place.lon)
-  }
+  const fetchWeatherData = async (lat, lon) => {
+    const dailyReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,windspeed_10m&forecast_days=1&timezone=auto`;
+    const sevenDayReport = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&forecast_days=7&timezone=auto`;
 
-  const fetchWeatherData = async (lat,lon)=>{
-try {
-  console.log(lon)
-const response = await axios(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&forcast_days=7&time_zone=auto`)
-const result =await response.data.daily
-console.log(result)
-} catch (error) {
-  console.log(error)
-}
-  }
+    try {
+      const [dailyResponse, sevenDayResponse] = await Promise.all([
+        axios.get(dailyReport),
+        axios.get(sevenDayReport),
+      ]);
+
+      const result1 = dailyResponse.data;
+      const result2 = sevenDayResponse.data;
+
+      setTodayReport({
+        "hourly": result1.hourly,
+        units: result1.hourly_units
+      });
+
+      setUpcommingDaysReport({
+        date: result2.daily.time,
+        max: result2.daily.temperature_2m_max.map(temp => Math.round(temp)),
+        min: result2.daily.temperature_2m_min.map(temp => Math.round(temp)),
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
     fetchData();
@@ -100,7 +121,7 @@ console.log(result)
       <View className="flex-row justify-between pb-2 mt-5">
         <View className="flex-row items-center gap-3">
           <Ionicons name="location-outline" style={[styles.text]} />
-          <Text style={[styles.text]}>Delhi</Text>
+          <Text style={[styles.text]}>{location?.name}</Text>
         </View>
         <View className="flex-row items-center gap-6">
           <TouchableOpacity
@@ -150,9 +171,11 @@ console.log(result)
                 styles.text,
                 {fontSize: 50, textAlignVertical: 'bottom'},
               ]}>
-              23C
+             {todayReport.hourly && todayReport.hourly.temperature_2m[dayjs().format("HH")]}
             </Text>
-            <Text style={[styles.text, {fontSize: 23}]}>{dayjs().format('DD / MM')}</Text>
+            <Text style={[styles.text, {fontSize: 23}]}>
+              {upcommingDaysReport?.date && `${upcommingDaysReport.max[0]}/${upcommingDaysReport.min[0]}`}
+            </Text>
             <TouchableOpacity
               onPress={() => fetchData()}
               style={[styles.circleButton, {transform: [{scaleX: -1}]}]}
@@ -284,16 +307,24 @@ console.log(result)
                   borderRadius: 10,
                   padding: 12,
                 }}>
-                  <View style={{gap:4}}>
-
-                {searchLocations &&
-                  searchLocations.map((place, index) => (
-                    <TouchableOpacity key={index} style={{borderRadius:10,borderColor:"#212121",borderBottomWidth:1,height:40}} onPress={()=>placeClickHandler(place)}>
-                      <Text style={{color: 'white'}} numberOfLines={2}>{place.display_name}</Text>
-                    </TouchableOpacity>
-                  ))}
-                  </View>
-
+                <View style={{gap: 4}}>
+                  {searchLocations &&
+                    searchLocations.map((place, index) => (
+                      <TouchableOpacity
+                        key={index}
+                        style={{
+                          borderRadius: 10,
+                          borderColor: '#212121',
+                          borderBottomWidth: 1,
+                          height: 40,
+                        }}
+                        onPress={() => placeClickHandler(place)}>
+                        <Text style={{color: 'white'}} numberOfLines={2}>
+                          {place.display_name}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                </View>
               </ScrollView>
             </View>
           </Pressable>
