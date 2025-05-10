@@ -37,6 +37,31 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
 endif()
 
+# react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/rnblurview-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
+endif()
+
+# react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/ComponentDescriptors.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/EventEmitters.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/Props.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/ShadowNodes.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/States.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/@react-native-community/blur/android/build/generated/source/codegen/jni/react/renderer/components/rnblurview/rnblurviewJSI-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86_64/CMakeFiles/cmake.verify_globs")
+endif()
+
 # react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/*.cpp")
 set(OLD_GLOB

@@ -5,6 +5,13 @@
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/States.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/rnasyncstorageJSI-generated.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/rnasyncstorage-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/react/renderer/components/rnblurview/ComponentDescriptors.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/react/renderer/components/rnblurview/EventEmitters.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/react/renderer/components/rnblurview/Props.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/react/renderer/components/rnblurview/ShadowNodes.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/react/renderer/components/rnblurview/States.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/react/renderer/components/rnblurview/rnblurviewJSI-generated.cpp.o
+/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnblurview_autolinked_build/CMakeFiles/react_codegen_rnblurview.dir/rnblurview-generated.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/ComponentDescriptors.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/EventEmitters.cpp.o
 /home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir/react/renderer/components/rnreanimated/Props.cpp.o

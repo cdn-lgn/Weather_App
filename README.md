@@ -1,3 +1,5 @@
+<!-- https://nominatim.openstreetmap.org/search?q=delhi&format=json -->
+<!-- https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.2090&current_weather=true -->
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started

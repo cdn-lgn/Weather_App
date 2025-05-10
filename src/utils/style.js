@@ -8,6 +8,13 @@ const styles = StyleSheet.create({
   S3:{
     backgroundColor:"#212121",
     borderRadius:10,
+  },
+  circleButton: {
+    padding: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
