@@ -18,7 +18,7 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import {LineChart} from "react-native-gifted-charts"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import fetchLocation from '../utils/fetchLocation';
 import openAppSettings from '../utils/openSettings';
@@ -41,6 +41,8 @@ const WeatherScreen = () => {
   const [location, setLocation] = useState(null);
   const [todayReport, setTodayReport] = useState({});
   const [upcommingDaysReport, setUpcommingDaysReport] = useState({});
+  const [graphData, setGraphData] = useState([]); // Initialize as empty array instead of object
+
   const [searchLocations, setSearchLocations] = useState([]);
   const [searchModal, setSearchModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -122,6 +124,15 @@ const WeatherScreen = () => {
 
       const {hourly, hourly_units: units} = dailyResponse.data;
       const {daily} = sevenDayResponse.data;
+
+      // Make sure we're setting an array of data points
+      const graphData = Array.from({length: 24}, (_, index) => ({
+        value: Math.round(hourly.temperature_2m[index]),
+        label: `${index}h`,
+        dataPointText: `${Math.round(hourly.temperature_2m[index])}°`
+      }));
+
+      setGraphData(graphData);
 
       setTodayReport({
         hourly: {
@@ -306,8 +317,27 @@ const WeatherScreen = () => {
         <View className="flex-row justify-between items-center mb-4">
           <Text style={[styles.text]} className="text-lg">Today</Text>
         </View>
-        <View style={{height: 200}} className="justify-center">
-          {/* Empty section for future implementation */}
+        <View style={{width: '100%'}} className="justify-center">
+          <LineChart
+            data={graphData}
+            initialSpacing={5}
+            spacing={35}
+            maxValue={60}
+            dataPointsRadius={0}
+            minValue={-20}
+            color="rgba(255, 255, 255, 0.8)"
+            areaChart
+            isAnimated
+            animationDuration={1500}
+            startFillColor="#56acce"
+            startOpacity={0.8}
+            endOpacity={0.3}
+            hideAxesAndRules
+            hideYAxisText
+            textColor="white"
+            textFontSize={14}
+            xAxisLabelTextStyle={{color: 'white', fontSize: 12}}
+          />
         </View>
       </View>
 

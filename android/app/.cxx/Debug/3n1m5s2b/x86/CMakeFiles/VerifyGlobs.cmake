@@ -182,6 +182,44 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/CMakeFiles/cmake.verify_globs")
 endif()
 
+# rnsvg_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt:24 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/rnsvg.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/CMakeFiles/cmake.verify_globs")
+endif()
+
+# rnsvg_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt:24 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp/react/renderer/components/rnsvg/*.cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp/react/renderer/components/rnsvg/RNSVGImageShadowNode.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp/react/renderer/components/rnsvg/RNSVGImageState.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp/react/renderer/components/rnsvg/RNSVGLayoutableShadowNode.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp/react/renderer/components/rnsvg/RNSVGShadowNodes.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/CMakeFiles/cmake.verify_globs")
+endif()
+
+# rnsvg_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt:25 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/*cpp")
+set(OLD_GLOB
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/ComponentDescriptors.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/EventEmitters.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/Props.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/ShadowNodes.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/States.cpp"
+  "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg/rnsvgJSI-generated.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "/home/kali/Desktop/WeatherApp/android/app/.cxx/Debug/3n1m5s2b/x86/CMakeFiles/cmake.verify_globs")
+endif()
+
 # react_codegen_SRCS at /home/kali/Desktop/WeatherApp/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt:9 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "/home/kali/Desktop/WeatherApp/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/*.cpp")
 set(OLD_GLOB

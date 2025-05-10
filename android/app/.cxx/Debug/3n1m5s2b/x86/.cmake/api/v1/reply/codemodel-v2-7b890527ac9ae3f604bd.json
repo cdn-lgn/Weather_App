@@ -14,7 +14,8 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -115,6 +116,21 @@
 					"source" : "/home/kali/Desktop/WeatherApp/node_modules/react-native-safe-area-context/android/src/main/jni",
 					"targetIndexes" : 
 					[
+						8
+					]
+				},
+				{
+					"build" : "rnsvg_autolinked_build",
+					"jsonFile" : "directory-rnsvg_autolinked_build-Debug-fdd0eb7cb209169065b6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/kali/Desktop/WeatherApp/node_modules/react-native-svg/android/src/main/jni",
+					"targetIndexes" : 
+					[
 						7
 					]
 				},
@@ -147,7 +163,8 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					],
 					"name" : "appmodules",
 					"targetIndexes" : 
@@ -159,7 +176,8 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					]
 				}
 			],
@@ -168,12 +186,12 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "appmodules::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-appmodules-Debug-30cdb35c11bebea76469.json",
+					"jsonFile" : "target-appmodules-Debug-894d89831b3e56433cfd.json",
 					"name" : "appmodules",
 					"projectIndex" : 0
 				},
 				{
-					"directoryIndex" : 7,
+					"directoryIndex" : 8,
 					"id" : "react_codegen_RNVectorIconsSpec::@479809fae146501fd34d",
 					"jsonFile" : "target-react_codegen_RNVectorIconsSpec-Debug-c0ddc8df6fcb215baeaa.json",
 					"name" : "react_codegen_RNVectorIconsSpec",
@@ -212,6 +230,13 @@
 					"id" : "react_codegen_rnskia::@376d8504f62839611b97",
 					"jsonFile" : "target-react_codegen_rnskia-Debug-c626b77200bff8854905.json",
 					"name" : "react_codegen_rnskia",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "react_codegen_rnsvg::@4f40eb209d0c0b4a3b65",
+					"jsonFile" : "target-react_codegen_rnsvg-Debug-9c79b8c0fa688b7115f7.json",
+					"name" : "react_codegen_rnsvg",
 					"projectIndex" : 0
 				},
 				{
