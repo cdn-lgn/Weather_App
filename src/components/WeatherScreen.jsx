@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Text,
   View,
@@ -21,11 +21,13 @@ import openAppSettings from '../utils/openSettings';
 import styles from '../utils/style';
 import dayjs from 'dayjs';
 import {BlurView} from '@react-native-community/blur';
+import axios from 'axios';
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState(null);
-  const [date, setDate] = useState('');
+  const [searchLocations, setSearchLocations] = useState([]);
   const [searchModal, setSearchModal] = useState(false);
+  const intervalRef = useRef(null);
 
   const fetchData = async () => {
     try {
@@ -43,9 +45,52 @@ const WeatherScreen = () => {
     }
   };
 
+  const searchHandle = text => {
+    if (intervalRef.current) {
+      clearTimeout(intervalRef.current);
+    }
+    intervalRef.current = setTimeout(async () => {
+      if (!text) {
+        setSearchLocations([]);
+        return;
+      }
+      try {
+        const response = await axios.get(
+          `https://nominatim.openstreetmap.org/search?q=${text}&format=json`,
+        );
+        const data = response.data;
+        const results = data.map(place => ({
+          name: place.name || place.display_name,
+          display_name: place.display_name,
+          lat: place.lat,
+          lon: place.lon,
+        }));
+        setSearchLocations(results);
+      } catch (error) {
+        console.error('Error fetching location:', error);
+        setSearchLocations([]);
+      }
+    }, 1000);
+  };
+
+
+  const placeClickHandler = async(place)=>{
+console.log(place)
+await fetchWeatherData(place.lat,place.lon)
+  }
+
+  const fetchWeatherData = async (lat,lon)=>{
+try {
+  console.log(lon)
+const response = await axios(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&forcast_days=7&time_zone=auto`)
+const result =await response.data.daily
+console.log(result)
+} catch (error) {
+  console.log(error)
+}
+  }
+
   useEffect(() => {
-    const currentDate = dayjs().format('MMM DD');
-    setDate(currentDate);
     fetchData();
   }, []);
 
@@ -95,7 +140,7 @@ const WeatherScreen = () => {
           imageStyle={{borderRadius: 10}}
           blurRadius={10}>
           <View>
-            <Text style={[styles.text]}>Today, 09 May</Text>
+            <Text style={[styles.text]}>Today, {dayjs().format('MMM DD')}</Text>
             <Text style={[styles.text, {fontSize: 23}]}>Clear and Sunny</Text>
           </View>
 
@@ -107,7 +152,7 @@ const WeatherScreen = () => {
               ]}>
               23C
             </Text>
-            <Text style={[styles.text, {fontSize: 23}]}>26/12</Text>
+            <Text style={[styles.text, {fontSize: 23}]}>{dayjs().format('DD / MM')}</Text>
             <TouchableOpacity
               onPress={() => fetchData()}
               style={[styles.circleButton, {transform: [{scaleX: -1}]}]}
@@ -205,20 +250,51 @@ const WeatherScreen = () => {
             onPress={() => setSearchModal(false)}
             className="flex items-end justify-end">
             <View
-              style={[styles.S3, {width: '100%', height: '90%' ,padding:8}]}
-              onStartShouldSetResponder={() => true}
-            >
-              <View style={{backgroundColor:"black",borderRadius:20}}>
-<TextInput placeholder='place' style={ {
-    height: 40,
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    backgroundColor:'rgba(255, 255, 255, 0.3)',
-    borderRadius:20,
-    padding: 10,
-
-  }}/>
+              style={[
+                styles.S3,
+                {
+                  width: '100%',
+                  height: '90%',
+                  paddingVertical: 16,
+                  paddingHorizontal: 8,
+                  gap: 16,
+                  justifyContent: 'flex-start',
+                },
+              ]}
+              onStartShouldSetResponder={() => true}>
+              <View style={{backgroundColor: 'black', borderRadius: 20}}>
+                <TextInput
+                  placeholder="place"
+                  style={{
+                    height: 40,
+                    borderWidth: 2,
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                    borderRadius: 20,
+                    padding: 10,
+                  }}
+                  onChangeText={text => {
+                    searchHandle(text);
+                  }}
+                />
               </View>
+              <ScrollView
+                style={{
+                  backgroundColor: 'black',
+                  borderRadius: 10,
+                  padding: 12,
+                }}>
+                  <View style={{gap:4}}>
+
+                {searchLocations &&
+                  searchLocations.map((place, index) => (
+                    <TouchableOpacity key={index} style={{borderRadius:10,borderColor:"#212121",borderBottomWidth:1,height:40}} onPress={()=>placeClickHandler(place)}>
+                      <Text style={{color: 'white'}} numberOfLines={2}>{place.display_name}</Text>
+                    </TouchableOpacity>
+                  ))}
+                  </View>
+
+              </ScrollView>
             </View>
           </Pressable>
         </BlurView>
