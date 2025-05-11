@@ -66,18 +66,6 @@ The app uses two background images for day and night modes:
 - `src/assets/sample1.jpg` - Day background
 - `src/assets/sample2.jpg` - Night background
 
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Acknowledgments
 
 - Weather data provided by Open-Meteo
