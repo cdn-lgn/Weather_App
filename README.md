@@ -25,7 +25,7 @@ A beautiful and modern weather application built with React Native that provides
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/WeatherApp.git
+git clone https://github.com/cd-lgn/WeatherApp.git
 ```
 
 2. Install dependencies
@@ -53,9 +53,11 @@ This app uses two main APIs:
 ## Tech Stack
 
 - React Native
-- NativeWind (TailwindCSS)
-- Victory Native (Charts)
+- NativeWind (Tailwind CSS for React Native)
+- React Native Gifted Charts
 - React Native Vector Icons
+- React Native Blur
+- React Native Geolocation Service
 - Axios for API calls
 - dayjs for date handling
 
