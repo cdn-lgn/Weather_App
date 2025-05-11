@@ -17,8 +17,8 @@ A beautiful and modern weather application built with React Native that provides
 <!-- Add these screenshots to /home/kali/Desktop/WeatherApp/screenshots/ directory -->
 
 <div style="display: flex; gap: 10px;">
-    <img src="screenshots/home.png" width="200" alt="Home Screen"/>
-    <img src="screenshots/search.png" width="200" alt="Search Screen"/>
+    <img src="src/assets/sample1.jpg" width="200" alt="Home Screen"/>
+    <img src="src/assets/sample2.jpg" width="200" alt="Search Screen"/>
 </div>
 
 ## Installation
